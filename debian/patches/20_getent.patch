@@ -1,0 +1,29 @@
+diff -uNr openmediavault/usr/share/php/openmediavault/system.inc openmediavault.patched/usr/share/php/openmediavault/system.inc
+--- openmediavault/usr/share/php/openmediavault/system.inc	2012-10-09 17:52:03.820014659 +0200
++++ openmediavault.patched/usr/share/php/openmediavault/system.inc	2012-10-09 19:54:53.352017394 +0200
+@@ -1927,9 +1927,14 @@
+ 	 * @return TRUE if the system group exists, otherwise FALSE.
+ 	 */
+ 	public function exists() {
+-		if ($this->getData() === FALSE)
++		if (!is_null($this->members))
++			return TRUE;
++		$cmd = sprintf("export LANG=C; getent group %s", !is_null(
++		  $this->gid) ? strval($this->gid) : escapeshellarg($this->name));
++		@OMVUtil::exec($cmd, $output, $result);
++		if (($result !== 0) || empty($output[0]))
+ 			return FALSE;
+-		return !is_null($this->members);
++		return TRUE;
+ 	}
+ 
+ 	/**
+@@ -2012,7 +2017,7 @@
+ 	 * @return An array of system user names, otherwise FALSE.
+ 	 */
+ 	public static function get() {
+-		$cmd = "export LANG=C; getent passwd";
++		$cmd = "export LANG=C; " . $GLOBALS['OMV_GETENT_PASSWD'] ;
+ 		@OMVUtil::exec($cmd, $output, $result);
+ 		if ($result !== 0)
+ 			return FALSE;

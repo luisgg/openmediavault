@@ -1927,9 +1927,14 @@ class OMVSystemGroup extends OMVObject {
 	 * @return TRUE if the system group exists, otherwise FALSE.
 	 */
 	public function exists() {
-		if ($this->getData() === FALSE)
+		if (!is_null($this->members))
+			return TRUE;
+		$cmd = sprintf("export LANG=C; getent group %s", !is_null(
+		  $this->gid) ? strval($this->gid) : escapeshellarg($this->name));
+		@OMVUtil::exec($cmd, $output, $result);
+		if (($result !== 0) || empty($output[0]))
 			return FALSE;
-		return !is_null($this->members);
+		return TRUE;
 	}
 
 	/**
@@ -2012,7 +2017,7 @@ class OMVSystemUsers extends OMVObject {
 	 * @return An array of system user names, otherwise FALSE.
 	 */
 	public static function get() {
-		$cmd = "export LANG=C; getent passwd";
+		$cmd = "export LANG=C; " . $GLOBALS['OMV_GETENT_PASSWD'] ;
 		@OMVUtil::exec($cmd, $output, $result);
 		if ($result !== 0)
 			return FALSE;
