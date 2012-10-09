@@ -1,0 +1,12 @@
+diff -uNr openmediavault/usr/share/openmediavault/scripts/ssh openmediavault.patched/usr/share/openmediavault/scripts/ssh
+--- openmediavault/usr/share/openmediavault/scripts/ssh	2012-10-09 17:52:03.820014659 +0200
++++ openmediavault.patched/usr/share/openmediavault/scripts/ssh	2012-10-09 18:48:00.952014950 +0200
+@@ -29,7 +29,7 @@
+ . /usr/share/openmediavault/scripts/helper-functions
+ 
+ OMV_SSHD_CONFIG=${OMV_SSHD_CONFIG:-"/etc/ssh/sshd_config"}
+-OMV_SSHD_ALLOWGROUPS=${OMV_SSHD_ALLOWGROUPS:-"root ssh"}
++OMV_SSHD_ALLOWGROUPS=${OMV_SSHD_ALLOWGROUPS:-"root ssh sudo"}
+ OMV_SSHD_SUBSYSTEM_SFTP=${OMV_SSHD_SUBSYSTEM_SFTP:-"/usr/lib/openssh/sftp-server"}
+ 
+ # Create sshd_config file.

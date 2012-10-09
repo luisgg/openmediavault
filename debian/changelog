@@ -1,6 +1,7 @@
 openmediavault (0.4.0.2-0aurex1) precise; urgency=low
 
   * Rebuild for aurex 12.04
+  * Added 10_ssh_groups.patch to enabel ssh access to 'sudo' group
 
  -- Luis Antonio Garcia Gisbert <luisgg@gmail.com>  Tue, 09 Oct 2012 17:56:47 +0200
 
