@@ -45,7 +45,7 @@ case "$1" in
 			####################################################################
 			if ! getent passwd openmediavault > /dev/null 2>&1; then
 				useradd --system --groups sudo,shadow --user-group openmediavault || :
-				echo "%openmediavault ALL=NOPASSWD: ALL" >> /etc/sudoers
+			#	echo "%openmediavault ALL=NOPASSWD: ALL" >> /etc/sudoers
 			fi
 
 			####################################################################
