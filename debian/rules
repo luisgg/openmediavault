@@ -15,14 +15,10 @@ override_dh_install:
 	echo "Removing SCM files ..." >&2
 	find $(CURDIR)/debian/$(OMV_PACKAGE) \( -name .svn -o -name .git \) \
 	  -type d -print0 -prune | xargs -0 rm -rf
-	echo "%openmediavault ALL=NOPASSWD: ALL" >> $(CURDIR)/debian/openmediavault/usr/share/openmediavault/50-openmediavault
-	chmod 0440 $(CURDIR)/debian/openmediavault/usr/share/openmediavault/50-openmediavault
 
 override_dh_link:
 	echo "/ietc/init.d/smbd /etc/init.d/samba" >>  $(CURDIR)/debian/openmediavault.links
-	echo "/usr/share/openmediavault/50-openmediavault /etc/sudoers.d/50-openmediavault" >>  $(CURDIR)/debian/openmediavault.links
 	dh_link
 
 override_dh_clean:
 	rm -f $(CURDIR)/debian/openmediavault.links 
-	rm -f $(CURDIR)/debian/openmediavault/usr/share/openmediavault/50-openmediavault
