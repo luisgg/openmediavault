@@ -1,5 +1,5 @@
 Source: openmediavault
-Section: web net
+Section: web
 Priority: optional
 Maintainer: Volker Theile <volker.theile@openmediavault.org>
 Build-Depends: debhelper (>> 7), gettext
