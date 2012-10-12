@@ -1,0 +1,97 @@
+#!/bin/sh
+die(){
+	echo "$1" >&2
+	cd $CUR_DIR
+	exit 1
+}
+get_revision(){
+	REV_NUM="$(LANG=C svn info "$1" |sed -ne "/Last Changed Rev:/s%^.*: %%p")"
+	[ "$REV_NUM" ] || return 1
+	echo "$REV_NUM" 
+	return 0
+}
+
+get_debversion(){
+	[ -r "$1/debian/changelog" ] || return 1
+	sed -ne "1{s%^.*(%%;s%).*$%%;p}" "$1/debian/changelog"
+	return 0
+}
+
+get_debname(){
+	[ -r "$1/debian/control" ] || return 1
+	sed -ne "/^Source:/{s%^.*:[[:blank:]]*%%;;p}" "$1/debian/control"
+	return 0
+}
+
+do_tarball(){
+	mkdir -p $TARBALL_DIR
+	SOURCE_DIR="$1"
+	REV_NUM="$2"
+	TAR_NAME="$3"
+	TAR_VERSION="$4"
+	TAR_FILE="${TARBALL_DIR}/${TAR_NAME}_${TAR_VERSION}.orig.tar.gz"
+	if [ -r "$TAR_FILE" ] ; then
+		echo "No changes in $TAR_NAME"
+	else
+		echo "NEW VERSION: ${TAR_VERSION} of ${TAR_NAME}"
+		tar --exclude=.svn -cvzf $TAR_FILE $SOURCE_DIR >/dev/null
+		cat << EOF > "${TARBALL_DIR}/${TAR_NAME}_${TAR_VERSION}.changelog"
+$TAR_NAME (${TAR_VERSION}${DEBREVISION}) $DEBDISTNAME; urgency=low
+
+  * New upstream snapshot, based on 'trunk' revision $REV_NUM ($(date "+%F"))
+  * Merge with latest upstream sources and rebuild for $AUREX_DIST
+
+ -- $DEBFULLNAME <$DEBEMAIL>  $TIME_STAMP
+
+EOF
+	fi
+}
+
+DEBFULLNAME="Luis Antonio Garcia Gisbert"
+DEBEMAIL="luisgg@gmail.com"
+DEBDISTNAME="precise"
+AUREX_DIST="aurex 12.04"
+DEBREVISION="-0aurex1"
+
+SVN_RELDIR="deb"
+SVN_URL="https://openmediavault.svn.sourceforge.net/svnroot/openmediavault/trunk/deb"
+
+TIME_STAMP="$(date -R)"
+CUR_DIR="$(pwd)"
+TARBALL_DIR="$CUR_DIR/tarballs"
+
+if [ ! -d "$SVN_RELDIR" ] ; then
+	echo "Unable to find locañ work copy of svn in $SVN_RELDIR"
+	echo "Trying to checkout a new copy from $SVN_URL"
+	svn co "$SVN_URL" || die "Error trying to checkout from $SVN_URL"
+fi
+
+cd $SVN_DIR
+echo "Updating repo. Please wait ..."
+svn up || die "Error updating repo"
+for d in $(ls -1) ; do
+	if [ -d "$d" ] ; then
+		REV_NUM="$(get_revision "$d")" || die "Error getting revision number in $d"
+		if [ -d "$d/debian" ] ; then
+			# debian package, just one entity
+			DEB_NUM="$(get_debversion "$d")" || die "Unable to get debian version of $d"
+			DEB_NAME="$(get_debname "$d")" || die "Unable to get debian package name of $d"
+			TAR_VERSION="${DEB_NUM}+svn${REV_NUM}"
+			TAR_NAME="${DEB_NAME}"
+			do_tarball $d $REV_NUM $TAR_NAME $TAR_VERSION
+		else
+			# pack each file/dir
+			for f in $(ls -1 $d) ; do
+				REV_NUM="$(get_revision "$d/$f")" || die "Error getting revision number of $d/$f"
+				TAR_NAME="${d}-${f}"
+				TAR_VERSION="svn${REV_NUM}"
+				do_tarball $d $REV_NUM $TAR_NAME $TAR_VERSION
+			done
+		fi
+	fi
+done
+cd $CUR_DIR
+exit 0
+		
+			
+
