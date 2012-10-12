@@ -1,3 +1,17 @@
+openmediavault (0.4.1+svn346-0aurex1) precise; urgency=low
+
+  * New upstream snapshot, based on 'trunk' revision 346 (2012-10-12)
+  * Merge with latest upstream sources and rebuild for aurex 12.04
+
+ -- Luis Antonio Garcia Gisbert <luisgg@gmail.com>  Fri, 12 Oct 2012 08:53:29 +0200
+
+openmediavault (0.4.1) stable; urgency=low
+
+  * Mantis 0000613: First letter in username automatically gets capitalized
+    at log in.
+
+ -- Volker Theile <volker.theile@openmediavault.org>  Wed, 10 Oct 2012 11:58:17 +0200
+
 openmediavault (0.4.0.2-0aurex1) precise; urgency=low
 
   * Rebuild for aurex 12.04
@@ -17,7 +31,7 @@ openmediavault (0.4.0.1) stable; urgency=low
 
   * Mantis 0000595: Revert previous changes.
 
- -- vot <vot@genesis>  Wed, 26 Sep 2012 18:05:17 +0200
+ -- Volker Theile <volker.theile@openmediavault.org>  Wed, 26 Sep 2012 18:05:17 +0200
 
 openmediavault (0.4) stable; urgency=low
 
