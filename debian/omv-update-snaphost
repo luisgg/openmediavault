@@ -69,12 +69,12 @@ CUR_DIR="$(pwd)"
 TARBALL_DIR="$CUR_DIR/tarballs"
 
 if [ ! -d "$SVN_RELDIR" ] ; then
-	echo "Unable to find locañ work copy of svn in $SVN_RELDIR"
+	echo "Unable to find local work copy of svn in $SVN_RELDIR"
 	echo "Trying to checkout a new copy from $SVN_URL"
 	svn co "$SVN_URL" || die "Error trying to checkout from $SVN_URL"
 fi
 
-cd $SVN_DIR
+cd $SVN_RELDIR
 echo "Updating repo. Please wait ..."
 svn up || die "Error updating repo"
 for d in $(ls -1) ; do
