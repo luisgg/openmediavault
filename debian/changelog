@@ -2,6 +2,9 @@ openmediavault (0.4.1+svn347-0aurex3) precise; urgency=low
 
   * Replace 'graceful' with reload when invoking apache2 init script
     in postinstall
+  * added 30_enable_ssh_by_default.patch to modify template of config.xml
+    in order to get ssh enabled after install
+  * 
 
  -- Luis Antonio Garcia Gisbert <luisgg@gmail.com>  Sat, 13 Oct 2012 17:13:35 +0200
 

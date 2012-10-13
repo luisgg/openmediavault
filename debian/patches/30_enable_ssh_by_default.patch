@@ -1,0 +1,13 @@
+diff --git a/usr/share/openmediavault/templates/config.xml b/usr/share/openmediavault/templates/config.xml
+index e0ca89d..9762221 100644
+--- a/usr/share/openmediavault/templates/config.xml
++++ b/usr/share/openmediavault/templates/config.xml
+@@ -253,7 +253,7 @@
+ 	<!-- Plugin configuration area -->
+ 	<services>
+ 		<ssh>
+-			<enable>0</enable>
++			<enable>1</enable>
+ 			<port>22</port>
+ 			<extraoptions></extraoptions>
+ 			<passwordauthentication>1</passwordauthentication>
