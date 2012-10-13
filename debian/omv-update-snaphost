@@ -42,16 +42,25 @@ do_tarball(){
 		DEB_VERSION="${TAR_VERSION}-0${DEBREVISION}"
 	else
 		ODEB_VERSION="${RAW_VERSION#*-}"
-		DEB_VERSION="${ODEB_VERSION}+${DEBREVISION}"
+		DEB_VERSION="${TAR_VERSION}-${ODEB_VERSION}+${DEBREVISION}"
 	fi
 	TAR_FILE="${TARBALL_DIR}/${TAR_NAME}_${TAR_VERSION}.orig.tar.gz"
-	if [ -r "$TAR_FILE" ] ; then
-		echo "No changes in $TAR_NAME"
-	else
+	CHANGELOG_FILE="${TARBALL_DIR}/${TAR_NAME}_${DEB_VERSION}.changelog"
+	if [ ! -r "$TAR_FILE" ] ; then
 		echo "NEW VERSION: ${TAR_VERSION} of ${TAR_NAME}"
+		rm -f ${TARBALL_DIR}/${TAR_NAME}_*.orig.tar.gz
 		tar --exclude=.svn -cvzf $TAR_FILE $SOURCE_DIR >/dev/null
-		cat << EOF > "${TARBALL_DIR}/${TAR_NAME}_${TAR_VERSION}.changelog"
-$TAR_NAME (${TAR_VERSION}${DEBREVISION}) $DEBDISTNAME; urgency=low
+	elif [ ! -r "$CHANGELOG_FILE" ] ; then
+		echo "NEW REVISION: ${DEB_VERSION} of ${TAR_NAME}"
+	else
+		echo "No changes in $TAR_NAME"
+		return 0
+	fi
+
+	# new version or revision, so write changelog
+	rm -f ${TARBALL_DIR}/${TAR_NAME}_*.changelog
+	cat << EOF > "$CHANGELOG_FILE"
+$TAR_NAME (${DEB_VERSION}) $DEBDISTNAME; urgency=low
 
   * New upstream snapshot, based on 'trunk' revision $REV_NUM ($(date "+%F"))
   * Merge with latest upstream sources and rebuild for $AUREX_DIST
@@ -59,7 +68,6 @@ $TAR_NAME (${TAR_VERSION}${DEBREVISION}) $DEBDISTNAME; urgency=low
  -- $DEBFULLNAME <$DEBEMAIL>  $TIME_STAMP
 
 EOF
-	fi
 }
 
 DEBFULLNAME="Luis Antonio Garcia Gisbert"
