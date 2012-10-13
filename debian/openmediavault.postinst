@@ -151,7 +151,7 @@ case "$1" in
 			invoke-rc.d cron restart
 			invoke-rc.d watchdog restart
 			invoke-rc.d collectd restart
-			invoke-rc.d apache2 graceful
+			invoke-rc.d apache2 reload
 			invoke-rc.d monit restart
 		fi
 
@@ -380,7 +380,7 @@ case "$1" in
 		fi
 		if dpkg --compare-versions "$2" lt-nl "0.3.0.17"; then
 			rm -f /etc/php5/conf.d/pam_auth.ini
-			invoke-rc.d apache2 graceful
+			invoke-rc.d apache2 reload
 		fi
 		if dpkg --compare-versions "$2" lt-nl "0.3.0.21"; then
 			omv_config_add_element "//services/ftp" "dynmasqrefresh" "0"

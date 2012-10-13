@@ -1,3 +1,10 @@
+openmediavault (0.4.1+svn347-0aurex3) precise; urgency=low
+
+  * Replace 'graceful' with reload when invoking apache2 init script
+    in postinstall
+
+ -- Luis Antonio Garcia Gisbert <luisgg@gmail.com>  Sat, 13 Oct 2012 17:13:35 +0200
+
 openmediavault (0.4.1+svn347-0aurex2) precise; urgency=low
 
   * Added etc/apache2/openmediavault-webgui.d directory to dirs file
