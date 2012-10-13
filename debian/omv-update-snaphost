@@ -36,7 +36,14 @@ do_tarball(){
 	SOURCE_DIR="$1"
 	REV_NUM="$2"
 	TAR_NAME="$3"
-	TAR_VERSION="$4"
+	RAW_VERSION="$4"
+	TAR_VERSION="${RAW_VERSION%-*}"
+	if [ "$RAW_VERSION" = "$TAR_VERSION" ] ; then
+		DEB_VERSION="${TAR_VERSION}-0${DEBREVISION}"
+	else
+		ODEB_VERSION="${RAW_VERSION#*-}"
+		DEB_VERSION="${ODEB_VERSION}+${DEBREVISION}"
+	fi
 	TAR_FILE="${TARBALL_DIR}/${TAR_NAME}_${TAR_VERSION}.orig.tar.gz"
 	if [ -r "$TAR_FILE" ] ; then
 		echo "No changes in $TAR_NAME"
@@ -59,7 +66,7 @@ DEBFULLNAME="Luis Antonio Garcia Gisbert"
 DEBEMAIL="luisgg@gmail.com"
 DEBDISTNAME="precise"
 AUREX_DIST="aurex 12.04"
-DEBREVISION="-0aurex1"
+DEBREVISION="aurex1"
 
 SVN_RELDIR="deb"
 SVN_URL="https://openmediavault.svn.sourceforge.net/svnroot/openmediavault/trunk/deb"
