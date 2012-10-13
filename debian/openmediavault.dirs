@@ -8,3 +8,4 @@ var/cache/openmediavault
 var/cache/openmediavault/archives
 var/log/openmediavault
 export
+etc/apache2/openmediavault-webgui.d
