@@ -1,3 +1,10 @@
+openmediavault (0.4.1+svn347-0aurex1) precise; urgency=low
+
+  * New upstream snapshot, based on 'trunk' revision 347 (2012-10-13)
+  * Merge with latest upstream sources and rebuild for aurex 12.04
+
+ -- Luis Antonio Garcia Gisbert <luisgg@gmail.com>  Sat, 13 Oct 2012 11:07:52 +0200
+
 openmediavault (0.4.1+svn346-0aurex1) precise; urgency=low
 
   * New upstream snapshot, based on 'trunk' revision 346 (2012-10-12)
