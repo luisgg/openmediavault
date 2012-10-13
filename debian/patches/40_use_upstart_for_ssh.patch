@@ -1,0 +1,23 @@
+diff --git a/usr/share/openmediavault/scripts/configimport.d/50ssh b/usr/share/openmediavault/scripts/configimport.d/50ssh
+index adced7a..73ddb6d 100755
+--- a/usr/share/openmediavault/scripts/configimport.d/50ssh
++++ b/usr/share/openmediavault/scripts/configimport.d/50ssh
+@@ -30,8 +30,18 @@ omv-mkconf ssh
+ # Enable/disable service
+ if [ "$(omv_config_get "//services/ssh/enable")" = "0" ]; then
+ 	update-rc.d ssh disable 2>&1
++	if [ -e /etc/init/ssh.conf ] ; then
++		# upstart service
++		touch /etc/ssh/sshd_not_to_be_run
++		service ssh restart
++	fi
+ else
+ 	update-rc.d ssh enable 2>&1
++	if [ -e /etc/init/ssh.conf ] ; then
++		# upstart service
++		rm -f /etc/ssh/sshd_not_to_be_run
++		service ssh restart
++	fi
+ fi
+ 
+ exit 0

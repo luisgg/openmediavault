@@ -1,3 +1,4 @@
 10_ssh_groups.patch
 20_getent.patch
 30_enable_ssh_by_default.patch
+40_use_upstart_for_ssh.patch
