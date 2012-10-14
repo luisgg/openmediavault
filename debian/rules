@@ -5,7 +5,7 @@ OMV_PACKAGE := $(shell pwd | sed 's|.*/||')
 	dh $@ --parallel
 
 override_dh_installinit:
-	echo "OMV_GETENT_PASSWD=\"getent passwd |grep -v \'^al[[:digit:]]\'\"" >> $(CURDIR)/debian/openmediavault.openmediavault.default
+	echo "OMV_GETENT_PASSWD=\"getent passwd |grep -v '^al[[:digit:]]'\"" >> $(CURDIR)/debian/openmediavault.openmediavault.default
 	dh_installinit -r --no-start --name=openmediavault
 	dh_installinit -r --no-start --name=openmediavault-beep
 	dh_installinit -r --no-start --name=openmediavault-configimport
