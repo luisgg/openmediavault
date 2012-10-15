@@ -2,6 +2,7 @@ openmediavault (0.4.1+svn347-0aurex6) precise; urgency=low
 
   * updated 50_proftpd_home_path.patch to bind ftp shares to
     /srv/ftp
+  * force apache2 reload in every update
 
  -- Luis Antonio Garcia Gisbert <luisgg@gmail.com>  Tue, 16 Oct 2012 01:01:28 +0200
 

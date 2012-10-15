@@ -394,6 +394,7 @@ case "$1" in
 			omv-mkconf postfix
 			invoke-rc.d postfix restart
 		fi
+		invoke-rc.d apache2 reload
 	;;
 
 	triggered)
