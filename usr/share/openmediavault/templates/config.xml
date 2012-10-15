@@ -244,7 +244,7 @@
 		<sslport>443</sslport>
 		<forcesslonly>0</forcesslonly>
 		<sslcertificateref></sslcertificateref>
-		<timeout>5</timeout>
+		<timeout>30</timeout>
 		<dnssd>
 			<enable>1</enable>
 			<name>%h - Web administration</name>
@@ -253,7 +253,7 @@
 	<!-- Plugin configuration area -->
 	<services>
 		<ssh>
-			<enable>0</enable>
+			<enable>1</enable>
 			<port>22</port>
 			<extraoptions></extraoptions>
 			<passwordauthentication>1</passwordauthentication>

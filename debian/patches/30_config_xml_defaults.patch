@@ -1,7 +1,34 @@
+diff --git a/debian/patches/30_config_xml_defaults.patch b/debian/patches/30_config_xml_defaults.patch
+index 09ded82..e69de29 100644
+--- a/debian/patches/30_config_xml_defaults.patch
++++ b/debian/patches/30_config_xml_defaults.patch
+@@ -1,13 +0,0 @@
+-diff --git a/usr/share/openmediavault/templates/config.xml b/usr/share/openmediavault/templates/config.xml
+-index e0ca89d..9762221 100644
+---- a/usr/share/openmediavault/templates/config.xml
+-+++ b/usr/share/openmediavault/templates/config.xml
+-@@ -253,7 +253,7 @@
+- 	<!-- Plugin configuration area -->
+- 	<services>
+- 		<ssh>
+--			<enable>0</enable>
+-+			<enable>1</enable>
+- 			<port>22</port>
+- 			<extraoptions></extraoptions>
+- 			<passwordauthentication>1</passwordauthentication>
 diff --git a/usr/share/openmediavault/templates/config.xml b/usr/share/openmediavault/templates/config.xml
-index e0ca89d..9762221 100644
+index e0ca89d..c029949 100644
 --- a/usr/share/openmediavault/templates/config.xml
 +++ b/usr/share/openmediavault/templates/config.xml
+@@ -244,7 +244,7 @@
+ 		<sslport>443</sslport>
+ 		<forcesslonly>0</forcesslonly>
+ 		<sslcertificateref></sslcertificateref>
+-		<timeout>5</timeout>
++		<timeout>30</timeout>
+ 		<dnssd>
+ 			<enable>1</enable>
+ 			<name>%h - Web administration</name>
 @@ -253,7 +253,7 @@
  	<!-- Plugin configuration area -->
  	<services>
