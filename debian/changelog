@@ -1,3 +1,10 @@
+openmediavault (0.4.1+svn347-0aurex5) precise; urgency=low
+
+  * New patch 50_proftpd_home_path.patch to fix home directory
+   path of ftp user
+
+ -- Luis Antonio Garcia Gisbert <luisgg@gmail.com>  Mon, 15 Oct 2012 23:10:53 +0200
+
 openmediavault (0.4.1+svn347-0aurex4) precise; urgency=low
 
   * Remove incorrect handling of escape character in debian/rules
