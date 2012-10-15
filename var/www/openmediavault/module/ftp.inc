@@ -82,7 +82,7 @@ class OMVFTPModule extends OMVModuleAbstract
 	}
 
 	/**
-	 * Unmount /home/ftp/<xxx> directory before the share is deleted.
+	 * Unmount /srv/ftp/<xxx> directory before the share is deleted.
 	 */
 	public static function preDeleteShare($object) {
 		global $xmlConfig;

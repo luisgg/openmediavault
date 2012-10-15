@@ -1,3 +1,23 @@
+diff --git a/debian/patches/50_proftpd_home_path.patch b/debian/patches/50_proftpd_home_path.patch
+index 109fa00..e69de29 100644
+--- a/debian/patches/50_proftpd_home_path.patch
++++ b/debian/patches/50_proftpd_home_path.patch
+@@ -1,15 +0,0 @@
+-diff --git a/usr/share/openmediavault/scripts/proftpd b/usr/share/openmediavault/scripts/proftpd
+-index ff94bc0..0956af8 100755
+---- a/usr/share/openmediavault/scripts/proftpd
+-+++ b/usr/share/openmediavault/scripts/proftpd
+-@@ -31,8 +31,8 @@ set -e
+- 
+- OMV_PROFTPD_CONFIG=${OMV_PROFTPD_CONFIG:-"/etc/proftpd/proftpd.conf"}
+- OMV_PROFTPD_EXTENSIONSDIR=${OMV_PROFTPD_EXTENSIONSDIR:-"${OMV_SCRIPTS_DIR}/proftpd.d"}
+--OMV_PROFTPD_DEFAULTROOT=${OMV_PROFTPD_DEFAULTROOT:-"/home/ftp"}
+--OMV_PROFTPD_DISPLAYLOGIN=${OMV_PROFTPD_DISPLAYLOGIN:-"/home/ftp/welcome.msg"}
+-+OMV_PROFTPD_DEFAULTROOT=${OMV_PROFTPD_DEFAULTROOT:-"/srv/ftp"}
+-+OMV_PROFTPD_DISPLAYLOGIN=${OMV_PROFTPD_DISPLAYLOGIN:-"/srv/ftp/welcome.msg"}
+- OMV_PROFTPD_USEIPV6=${OMV_PROFTPD_USEIPV6:-"on"}
+- OMV_PROFTPD_DEFERWELCOME=${OMV_PROFTPD_DEFERWELCOME:-"off"}
+- OMV_PROFTPD_MULTILINERFC2228=${OMV_PROFTPD_MULTILINERFC2228:-"on"}
 diff --git a/usr/share/openmediavault/scripts/proftpd b/usr/share/openmediavault/scripts/proftpd
 index ff94bc0..0956af8 100755
 --- a/usr/share/openmediavault/scripts/proftpd
@@ -13,3 +33,29 @@ index ff94bc0..0956af8 100755
  OMV_PROFTPD_USEIPV6=${OMV_PROFTPD_USEIPV6:-"on"}
  OMV_PROFTPD_DEFERWELCOME=${OMV_PROFTPD_DEFERWELCOME:-"off"}
  OMV_PROFTPD_MULTILINERFC2228=${OMV_PROFTPD_MULTILINERFC2228:-"on"}
+diff --git a/var/www/openmediavault/module/ftp.inc b/var/www/openmediavault/module/ftp.inc
+index 82bce3d..b421c16 100755
+--- a/var/www/openmediavault/module/ftp.inc
++++ b/var/www/openmediavault/module/ftp.inc
+@@ -82,7 +82,7 @@ class OMVFTPModule extends OMVModuleAbstract
+ 	}
+ 
+ 	/**
+-	 * Unmount /home/ftp/<xxx> directory before the share is deleted.
++	 * Unmount /srv/ftp/<xxx> directory before the share is deleted.
+ 	 */
+ 	public static function preDeleteShare($object) {
+ 		global $xmlConfig;
+diff --git a/var/www/openmediavault/rpc/ftp.inc b/var/www/openmediavault/rpc/ftp.inc
+index ebfaf66..c58aecd 100644
+--- a/var/www/openmediavault/rpc/ftp.inc
++++ b/var/www/openmediavault/rpc/ftp.inc
+@@ -381,7 +381,7 @@ class FTPRpc extends OMVRpc {
+ 			$meobject = array(
+ 				"uuid" => OMVUtil::uuid(),
+ 				"fsname" => $sfpath,
+-				"dir" => sprintf("/home/ftp/%s", $sfobject['name']),
++				"dir" => sprintf("/srv/ftp/%s", $sfobject['name']),
+ 				"type" => "none",
+ 				"opts" => "bind",
+ 				"freq" => 0,

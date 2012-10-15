@@ -381,7 +381,7 @@ class FTPRpc extends OMVRpc {
 			$meobject = array(
 				"uuid" => OMVUtil::uuid(),
 				"fsname" => $sfpath,
-				"dir" => sprintf("/home/ftp/%s", $sfobject['name']),
+				"dir" => sprintf("/srv/ftp/%s", $sfobject['name']),
 				"type" => "none",
 				"opts" => "bind",
 				"freq" => 0,
