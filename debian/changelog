@@ -2,6 +2,9 @@ openmediavault (0.4.1+svn347-0aurex5) precise; urgency=low
 
   * New patch 50_proftpd_home_path.patch to fix home directory
    path of ftp user
+  * 30_config_xml_defaults.patch:
+    - enable ssh by default (old 30_enable_ssh_by_default.patch)
+    - increase default session timeout from 5 to 30 min
 
  -- Luis Antonio Garcia Gisbert <luisgg@gmail.com>  Mon, 15 Oct 2012 23:10:53 +0200
 
