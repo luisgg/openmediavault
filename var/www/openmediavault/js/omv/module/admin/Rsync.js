@@ -914,7 +914,7 @@ Ext.extend(OMV.Module.Services.Rsync.JobPropertyDialog, OMV.CfgObjectDialog, {
 				allowBlank: false,
 				editable: false,
 				triggerAction: "all",
-				value: new Date().format("i"),
+				value: String(new Date().getMinutes()),
 				flex: 1
 			},{
 				xtype: "checkbox",
@@ -943,7 +943,7 @@ Ext.extend(OMV.Module.Services.Rsync.JobPropertyDialog, OMV.CfgObjectDialog, {
 				allowBlank: false,
 				editable: false,
 				triggerAction: "all",
-				value: new Date().format("H"),
+				value: String(new Date().getHours()),
 				flex: 1
 			},{
 				xtype: "checkbox",
@@ -1015,6 +1015,13 @@ Ext.extend(OMV.Module.Services.Rsync.JobPropertyDialog, OMV.CfgObjectDialog, {
 			editable: false,
 			triggerAction: "all",
 			value: "*"
+		},{
+			xtype: "checkbox",
+			name: "dryrun",
+			fieldLabel: _("Trial run"),
+			checked: false,
+			inputValue: 1,
+			boxLabel: _("Perform a trial run with no changes made")
 		},{
 			xtype: "checkbox",
 			name: "recursive",
